@@ -6,6 +6,36 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script  >
+
+function turnLeft() {
+  var xhttp = new XMLHttpRequest();
+  /*xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };*/
+  xhttp.open("post", "/robot_left", true);
+  xhttp.send();
+}
+
+$("#left_button").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/robot_left/",
+        data: {
+        },
+        success: function(result) {
+            alert('ok');
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+</script>
+
 </head>
 
 <body>
@@ -21,7 +51,7 @@
             <button class="btn btn-primary btn-lg  center-block" type="button" name="Forward" value="Forward">Forward</button>
       </div>
       <div class="row  text-center">
-          <button type="button" class="btn btn-primary btn-lg active">Left</button>
+          <button type="button" id='left_button' onclick='turnLeft();' class="btn btn-primary btn-lg active">Left</button>
           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <button type="button" class="btn btn-default btn-lg active">Right</button>
         </div>

@@ -9,6 +9,12 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/robot_left', methods=['POST'])
+def robot_left():
+    print 'robot_left'
+
+
+#request.args.get('username')
 
 #
 #
