@@ -1,4 +1,4 @@
-This is a web interface to control a raspberry pi robot
+This is a web interface to control a raspberry pi robot.
 
 **Hardware**
 raspberry pi 3B
