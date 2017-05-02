@@ -1,10 +1,9 @@
 import io
 import picamera
 import logging
-import SocketServer
+import socketserver
 from threading import Condition
-from BaseHTTPServer  import HTTPServer, BaseHTTPRequestHandler
-
+from http import server
 
 PAGE="""\
 <html>
@@ -13,7 +12,7 @@ PAGE="""\
 </head>
 <body>
 <h1>PiCamera MJPEG Streaming Demo</h1>
-<img src="stream.mjpg" width="580" height="400" />
+<img src="stream.mjpg" width="640" height="480" />
 </body>
 </html>
 """
@@ -35,7 +34,7 @@ class StreamingOutput(object):
             self.buffer.seek(0)
         return self.buffer.write(buf)
 
-class StreamingHandler(BaseHTTPRequestHandler):
+class StreamingHandler(server.BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
             self.send_response(301)
@@ -74,13 +73,13 @@ class StreamingHandler(BaseHTTPRequestHandler):
             self.send_error(404)
             self.end_headers()
 
-class StreamingServer(SocketServer.ThreadingMixIn, HTTPServer):
+class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
 
-with picamera.PiCamera(resolution='300x200', framerate=12) as camera:
+with picamera.PiCamera(resolution='480x200', framerate=24) as camera:
+    camera.rotation=180
     output = StreamingOutput()
-    camera.rotation = 180
     camera.start_recording(output, format='mjpeg')
     try:
         address = ('', 8000)
