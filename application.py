@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, Response
 from gpiozero import Robot
 from gpiozero import Motor
 from functools import wraps
+from time import sleep
+
 app = Flask(__name__)
 
-#robot = Robot(left=(22, 27), right=(4, 17))
-#robot.forward
-#robot.backward
-#robot.left
-#robot.right
+robot = Robot(left=(22, 27), right=(4, 17))
+
+
+
 
 @app.route('/')
 def index():
@@ -17,23 +18,40 @@ def index():
 @app.route('/robot_left', methods=['POST'])
 def robot_left():
     print 'robot_left'
-    #robot.left
+    robot.left(.5)
+    sleep(.2)
+    robot.stop()
     return 'L'
 
 @app.route('/robot_right', methods=['POST'])
 def robot_right():
     print 'robot_right'
+    robot.right(.5)
+    sleep(.2)
+    robot.stop()
     return 'R'
 
 @app.route('/robot_forward', methods=['POST'])
 def robot_forward():
     print 'robot_forward'
+    robot.forward(.6)
+    sleep(.5)
+    robot.stop()  	
     return 'F'
 
 @app.route('/robot_backward', methods=['POST'])
 def robot_backward():
     print 'robot_backward'
+    robot.backward(.6)
+    sleep(.5)
+    robot.stop()
     return 'B'
+
+
+
+
+
+
 #request.args.get('username')
 
 #
