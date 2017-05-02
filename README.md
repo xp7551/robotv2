@@ -9,12 +9,21 @@ pi camera
 ABS project box
 
 **Software to install**
-install venv
+sudo install virtualenv
 pip install flask
 pip install RPi.GPIO
 pip install gpiozero
 apache httpd
 
+***Requirements***
+Python 2.7
+
 **Interface**
 
 **References**
+http://flask.pocoo.org/docs/0.12/installation/#virtualenv
+**ToDO**
+poweroff button
+install apache
+install media server (Run as daemon? or flash startup)
+button for different surfaces:hardwood;light carpet;heavy carpet
